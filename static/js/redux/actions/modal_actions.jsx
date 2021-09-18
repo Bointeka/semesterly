@@ -145,3 +145,5 @@ export const setUserSettingsModalVisible = () => ({
 export const setUserSettingsModalHidden = () => ({
   type: ActionTypes.SET_SETTINGS_MODAL_HIDDEN,
 });
+
+export const toggleMockModal = () => ({ type: ActionTypes.TOGGLE_MOCK_MODAL});

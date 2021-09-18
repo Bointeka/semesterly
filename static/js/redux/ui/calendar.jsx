@@ -23,6 +23,8 @@ import CellContainer from './containers/cell_container';
 import { DAYS } from '../constants/constants';
 import { ShareLink } from './master_slot';
 import * as SemesterlyPropTypes from '../constants/semesterlyPropTypes';
+import preferenceModal from '../reducers/preference_modal_reducer';
+import mockModal from '../reducers/mock_modal_reducer';
 
 const Row = (props) => {
   const timeText = props.displayTime ? <span>{props.displayTime}</span> : null;
@@ -308,6 +310,28 @@ class Calendar extends React.Component {
       </div>
         );
 
+    const mockButton = (
+      <div className="cal-btn-wrapper">
+        <button 
+          onClick={this.props.toggleMockModal}
+          className="save-timetable"
+          data-for="mock-btn-tooltip"
+          data-tip
+        >
+          <img src="/static/img/star.png" style={{marginTop: '1px'}} />
+        </button>
+        <ReactTooltip
+          id="mock-btn-tooltip"
+          class="tooltip"
+          type="dark"
+          place="bottom"
+          effect="solid">
+            <span>Mock Button</span>
+        </ReactTooltip>
+      </div>
+    );
+    console.log(mockButton);
+
 
     const pilotButton = (
       <a href={'/pilot/'} className="pilot-link">
@@ -342,6 +366,7 @@ class Calendar extends React.Component {
             { pilot }
           </div>
           <div className="fc-right">
+            { mockButton }
             { addSISButton }
             { addCustomEventButton }
             { shareButton }
@@ -452,6 +477,7 @@ Calendar.defaultProps = {
 
 Calendar.propTypes = {
   togglePreferenceModal: PropTypes.func.isRequired,
+  toggleMockModal: PropTypes.func.isRequired,
   triggerSaveCalendarModal: PropTypes.func.isRequired,
   isFetchingShareLink: PropTypes.bool.isRequired,
   endHour: PropTypes.number.isRequired,
